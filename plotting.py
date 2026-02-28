@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 from rg_functions import *
 
+
 def plot_function(fun,
-                  xlabel= "x",
+                  xlabel="x",
                   ylabel="y",
                   caption="",
                   x_min=-5,
@@ -34,28 +35,31 @@ def plot_function(fun,
 if __name__ == "__main__":
     def main1():
         plot_function(One_Dim_Ising.K_prime,
-            xlabel="K",
-            ylabel= "K'(K)",
-            caption= "plot of K'(K) for 1-dim ising",
-            x_min=0,
-            x_max=2,
-            num_points=100)
+                      xlabel="K",
+                      ylabel="K'(K)",
+                      caption="plot of K'(K) for 1-dim ising",
+                      x_min=0,
+                      x_max=2,
+                      num_points=100)
 
         plot_function(Two_Dim_Ising.K_prime,
-            xlabel="K",
-            ylabel= "K'(K)",
-            caption= "plot of K'(K) for 2-dim ising",
-            x_min=0,
-            x_max=2,
-            num_points=100)
+                      xlabel="K",
+                      ylabel="K'(K)",
+                      caption="plot of K'(K) for 2-dim ising",
+                      x_min=0,
+                      x_max=2,
+                      num_points=100)
+
+
     def main2():
         plot_function(Two_Dim_Ising.zeta,
-            xlabel="K",
-            ylabel= "zeta(K)",
-            caption= "plot of zeta(K) for 2-dim ising",
-            x_min=0,
-            x_max=2,
-            num_points=100)
+                      xlabel="K",
+                      ylabel="zeta(K)",
+                      caption="plot of zeta(K) for 2-dim ising",
+                      x_min=0,
+                      x_max=2,
+                      num_points=100)
+
 
     main1()
-    #main2()
+    # main2()
