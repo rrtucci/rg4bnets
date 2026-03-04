@@ -1,4 +1,6 @@
 import numpy as np
+from scipy.optimize import newton
+from globals import *
 
 
 class One_Dim_Ising:
@@ -34,17 +36,59 @@ class Two_Dim_Ising_Dbnet:
         cosh_0 = np.cosh(2 * K)
         cosh_m = np.cosh(K * (self.mean_spin - 2))
         cosh_p = np.cosh(K * (self.mean_spin + 2))
-        return K + 2 * .25 * np.log(cosh_0 ** 2 / (cosh_m * cosh_p))
+        return K + (2 / AA) * np.log(cosh_0 ** 2 / (cosh_m * cosh_p))
 
     def K_prime_plus(self, K):
         cosh_0 = np.cosh(2 * K)
         cosh_p = np.cosh(K * (self.mean_spin + 2))
-        return K * (1 + .5 * self.mean_spin) + 2 * .5 * np.log(cosh_0 / cosh_p)
+        return K * (1 + (4 / AA) * self.mean_spin) + \
+            (4 / AA) * np.log(cosh_0 / cosh_p)
 
     def K_prime_minus(self, K):
         cosh_0 = np.cosh(2 * K)
         cosh_m = np.cosh(K * (self.mean_spin - 2))
-        return K * (1 - .5 * self.mean_spin) + 2 * .5 * np.log(cosh_0 / cosh_m)
+        return K * (1 - (4 / AA) * self.mean_spin) + \
+            (4 / AA) * np.log(cosh_0 / cosh_m)
+
+
+class Two_Dim_Ising_Dbnet2:
+    def __init__(self, prob_plus):
+        self.prob_plus = prob_plus
+
+    def f(self, K_prime):
+        x = np.exp(AA * K_prime * K_CURIE) \
+            / (16 * (np.cosh(TWO * K_prime * K_CURIE) ** 4))
+        return x
+
+    def der_f(self, K_prime):
+        coeff = self.f(K_prime) * K_CURIE
+        return coeff * (AA - 4 * TWO * np.tanh(TWO * K_prime * K_CURIE))
+
+    def inv_f(self, y, K_prime_init=.1):
+        x0 = K_prime_init
+        return newton(
+            func=lambda x: self.f(x) - y,
+            x0=x0,
+            fprime=self.der_f
+        )
+
+    def x_3(self, K):
+        return np.exp((AA + 4) * K * K_CURIE) \
+            / (16 * (np.cosh((TWO + 1) * K * K_CURIE) ** 4))
+
+    def x_1(self, K):
+        return np.exp((AA - 4) * K * K_CURIE) \
+            / (16 * (np.cosh((TWO - 1) * K * K_CURIE) ** 4))
+
+    def K_prime_plus(self, K):
+        prob_minus = 1 - self.prob_plus
+        y = self.prob_plus * self.x_3(K) + prob_minus * self.x_1(K)
+        return self.inv_f(y)
+
+    def K_prime_minus(self, K):
+        prob_minus = 1 - self.prob_plus
+        y = self.prob_plus * self.x_1(K) + prob_minus * self.x_3(K)
+        return self.inv_f(y)
 
 
 if __name__ == "__main__":
@@ -55,4 +99,31 @@ if __name__ == "__main__":
             print(mean_spin, K_prime)
 
 
-    main1()
+    def main2():
+        def fun(x):
+            return x ** 3 + x
+
+        def dfun(x):
+            return 3 * x ** 2 + 1
+
+        def invfun(y, x0=20):
+            return newton(
+                func=lambda x: fun(x) - y,
+                x0=x0,
+                fprime=dfun
+            )
+
+        x = invfun(1)
+
+        print("x =", x)
+        print("Check:", fun(x))
+
+
+    def main3(x):
+        mom = Two_Dim_Ising_Dbnet2(0)
+        print("f(0)", mom.f(x))
+
+
+    # main1()
+    # main2()
+    main3(0)
