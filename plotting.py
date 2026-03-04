@@ -121,12 +121,12 @@ if __name__ == "__main__":
                        ylabel="K'/K_C",
                        caption=f"2-dim ising-dbnet, prob_plus={prob_plus:.3f}",
                        x_min=0,
-                       x_max=2,
+                       x_max=8,
                        num_points=100)
 
 
     # main1()
     # main2()
     # main3(1)
-    main4()
-    main5(prob_plus=.99)
+    #main4()
+    main5(prob_plus=.999)
