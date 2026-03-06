@@ -125,8 +125,8 @@ if __name__ == "__main__":
                        num_points=100)
 
 
-    # main1()
+    main1()
     # main2()
     # main3(1)
     #main4()
-    main5(prob_plus=.999)
+    #main5(prob_plus=.999)
