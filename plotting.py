@@ -14,13 +14,24 @@ def plot_functions(funs,
                    vert_x=K_CURIE,
                    vert_label=r"$K = K_c$"):
     """
-    Plots several functions ff(x) over the interval [x_min, x_max].
 
-    Parameters:
-        funs         : list of functions of one variable
-        x_min       : float, left endpoint
-        x_max       : float, right endpoint
-        num_points  : int, number of sample points
+    Parameters
+    ----------
+    funs: list[function]
+    fun_names: lis[str]
+    xlabel: str
+    ylabel: str
+    caption: str
+    x_min: int
+    x_max: int
+    num_points: int
+    do_vert_line: bool
+    vert_x: float
+    vert_label: str
+
+    Returns
+    -------
+
     """
     # plt.close('all')
     xx = np.linspace(x_min, x_max, num_points)
@@ -49,15 +60,6 @@ def plot_functions(funs,
 
 
 if __name__ == "__main__":
-    def main0():
-        funs = [
-            lambda x: np.sin(x),
-            lambda x: np.cos(x),
-            lambda x: 0.5 * x
-        ]
-
-        plot_functions(funs)
-
 
     def main1():
         plot_functions([One_Dim_Ising.Kprime],
@@ -86,51 +88,7 @@ if __name__ == "__main__":
                        x_max=2,
                        num_points=100)
 
-
-    def main3(mean_spin):
-        mom = Two_Dim_Ising_Dbnet1(mean_spin)
-        funs = [mom.Kprime_minus, mom.Kprime_av, mom.Kprime_plus]
-        fun_names = ["K' minus", "K' av", "K' plus"]
-
-        plot_functions(funs,
-                       fun_names=fun_names,
-                       xlabel="K",
-                       ylabel="K'(K)",
-                       caption="plot of K'(K) for 2-dim ising-dbnet",
-                       x_min=0,
-                       x_max=5,
-                       num_points=100)
-
-
-    def main4():
-        mom = Two_Dim_Ising_Dbnet2(0)
-        funs = [mom.f, mom.der_f]
-        fun_names = ["f", "der_f"]
-        plot_functions(funs,
-                       fun_names=fun_names,
-                       xlabel="K'/K_C",
-                       ylabel="f(K'/K_C)",
-                       caption="2-dim ising-dbnet",
-                       x_min=0,
-                       x_max=2,
-                       num_points=100)
-
-
-    def main5(prob_plus):
-        mom = Two_Dim_Ising_Dbnet2(prob_plus)
-        funs = [mom.Kprime_minus, mom.Kprime_plus]
-        fun_names = ["K' minus", "K' plus"]
-
-        plot_functions(funs,
-                       fun_names=fun_names,
-                       xlabel="K/K_C",
-                       ylabel="K'/K_C",
-                       caption=f"2-dim ising-dbnet, prob_plus={prob_plus:.3f}",
-                       x_min=0,
-                       x_max=8,
-                       num_points=100)
-
-    def main6():
+    def main3():
         mom = Two_Dim_Ising_Dbnet()
         plot_functions([Two_Dim_Ising.Kprime, mom.Kprime],
                        fun_names=["2-dim Ising", "2-dim Ising-dbnet"],
@@ -144,7 +102,4 @@ if __name__ == "__main__":
 
     # main1()
     # main2()
-    # main3(1)
-    #main4()
-    #main5(prob_plus=.999)
-    main6()
+    main3()
