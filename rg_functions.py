@@ -2,20 +2,23 @@ import numpy as np
 from scipy.optimize import newton
 from globals import *
 
-
 class One_Dim_Ising:
 
     @staticmethod
     def Kprime(K):
         """
+        This method outputs the RG transformation K'(K) for the standard 1-dim
+        Ising model
 
         Parameters
         ----------
         K: float
+            initial coupling constant (K = \beta *J)
 
         Returns
         -------
-        float
+        K: float
+            final coupling constant
 
         """
         return .5 * np.log(np.cosh(2 * K))
@@ -25,14 +28,18 @@ class Two_Dim_Ising:
     @staticmethod
     def Kprime(K):
         """
+        This method outputs the RG transformation K'(K) for the standard 2-dim
+        Ising model
 
         Parameters
         ----------
         K: float
+            initial coupling constant (K = \beta *J)
 
         Returns
         -------
-        float
+        K: float
+            final coupling constant
 
         """
         return (3 / 8) * np.log(np.cosh(4 * K))
@@ -40,6 +47,8 @@ class Two_Dim_Ising:
     @staticmethod
     def f(K):
         """
+        This method calculates f(K), a function of K used in calculation of
+        zeta(K) below
 
         Parameters
         ----------
@@ -55,6 +64,7 @@ class Two_Dim_Ising:
     @staticmethod
     def zeta(K):
         """
+        Partition function for 2-dim Ising Model (formula from misc/rg-lecture)
 
         Parameters
         ----------
@@ -73,6 +83,12 @@ class Two_Dim_Ising:
 
 class Two_Dim_Ising_Dbnet:
     """
+    This class will calculate quantities related to the 2-dim Ising-dbnet
+    model (see https://github.com/rrtucci/ising-dbnet) In particular,
+    it calculates its real space RG transformation, as calculated in the
+    white paper included in this repo.
+
+
     Attributes
     ----------
     Pp: float
