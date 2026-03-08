@@ -2,6 +2,7 @@ import numpy as np
 from scipy.optimize import newton
 from globals import *
 
+
 class One_Dim_Ising:
 
     @staticmethod
@@ -17,9 +18,8 @@ class One_Dim_Ising:
 
         Returns
         -------
-        K: float
-            final coupling constant
-
+        Kprime: float
+            the value of K' = final coupling constant
         """
         return .5 * np.log(np.cosh(2 * K))
 
@@ -38,8 +38,8 @@ class Two_Dim_Ising:
 
         Returns
         -------
-        K: float
-            final coupling constant
+        Kprime: float
+            the value of K' = final coupling constant
 
         """
         return (3 / 8) * np.log(np.cosh(4 * K))
@@ -83,22 +83,28 @@ class Two_Dim_Ising:
 
 class Two_Dim_Ising_Dbnet:
     """
-    This class will calculate quantities related to the 2-dim Ising-dbnet
-    model (see https://github.com/rrtucci/ising-dbnet) In particular,
-    it calculates its real space RG transformation, as calculated in the
+    This class calculates quantities related to the 2-dim Ising-dbnet model
+    (see https://github.com/rrtucci/ising-dbnet) In particular,
+    it calculates its real space RG transformation proposed in the
     white paper included in this repo.
 
 
     Attributes
     ----------
     Pp: float
+        Probability $P_+=P(S_5=+1)$. Pm =  probability $P_-=P(S_5=-1)$
     eta: float
+        sum of spins of 4 nearest neighbors to S_5. eta=4 if all 4 nearest
+        neighbors are +1
     lam: float
+        positive or negative float, proportional to <S_1>=the average spin for
+        the next-to-next nearest neighbors of S_5
 
     """
 
-    def __init__(self, Pp=1/4, lam=1/8, eta=4):
+    def __init__(self, Pp=1 / 4, lam=1 / 8, eta=4):
         """
+        Constructor
 
         Parameters
         ----------
@@ -112,27 +118,29 @@ class Two_Dim_Ising_Dbnet:
 
     def Kprime(self, K):
         """
+        This method outputs the RG transformation K'(K) for the 2-dim
+        Ising-dbnet model
 
         Parameters
         ----------
         K: float
+            initial coupling constant (K = \beta *J)
 
         Returns
         -------
-        float
+        Kprime: float
+            the value of K' = final coupling constant
 
         """
         Pm = 1 - self.Pp
 
         Denom = self.Pp / np.cosh(K * (1 + self.lam)) ** 4 + \
                 Pm / np.cosh(K * (-1 + self.lam)) ** 4
-        Num = self.Pp * np.exp(K * self.eta * (1 + 4 * self.lam)) /\
-              np.cosh(K * (1 + self.lam))** 4 + \
-              Pm * np.exp(K * self.eta * (-1 + 4 * self.lam)) /\
+        Num = self.Pp * np.exp(K * self.eta * (1 + 4 * self.lam)) / \
+              np.cosh(K * (1 + self.lam)) ** 4 + \
+              Pm * np.exp(K * self.eta * (-1 + 4 * self.lam)) / \
               np.cosh(K * (-1 + self.lam)) ** 4
 
         return (np.log(Num) - np.log(Denom)) / (4 * self.eta * self.lam)
 
-
-#if __name__ == "__main__":
-
+# if __name__ == "__main__":

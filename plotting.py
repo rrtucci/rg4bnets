@@ -10,27 +10,41 @@ def plot_functions(funs,
                    x_min=-5,
                    x_max=5,
                    num_points=100,
-                   do_vert_line = True,
+                   do_vert_line=True,
                    vert_x=K_CURIE,
                    vert_label=r"$K = K_c$"):
     """
+    This method generates a matplotlib plot for a list of functions.
 
     Parameters
     ----------
     funs: list[function]
+        list of functions to be plotted with the same x-y axes
     fun_names: lis[str]
+        list of the same length as funs, with the names of the functions in
+        funs
     xlabel: str
+        label of x axis of plot
     ylabel: str
+        label of y axis of plot
     caption: str
+        caption
     x_min: int
+        lowest x axis point
     x_max: int
+        highest x axis point
     num_points: int
+        number of points calculated and fitted
     do_vert_line: bool
+        whether to write dashed vertical line at some specified x value
     vert_x: float
-    vert_label: str
+        x value of vertical dashed line
+    vert_label:
+        label of vertical dashed line (for example, 'y=x' or 'x=5')
 
     Returns
     -------
+    None
 
     """
     # plt.close('all')
@@ -60,7 +74,6 @@ def plot_functions(funs,
 
 
 if __name__ == "__main__":
-
     def main1():
         plot_functions([One_Dim_Ising.Kprime],
                        xlabel="K",
@@ -87,6 +100,7 @@ if __name__ == "__main__":
                        x_min=0,
                        x_max=2,
                        num_points=100)
+
 
     def main3():
         mom = Two_Dim_Ising_Dbnet()
