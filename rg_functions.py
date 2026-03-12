@@ -23,6 +23,40 @@ class One_Dim_Ising:
         """
         return .5 * np.log(np.cosh(2 * K))
 
+    @staticmethod
+    def zeta(K, tol=1e-8):
+        """
+        Partition function for 1-dim Ising Model
+        (recursion formula from misc/rg-lecture)
+
+        zeta(K') = 2*zeta(K) - ln f(K)
+        Z(K=0)= 2^N
+        zeta(0) = ln(Z)/N = ln(2)
+
+        Parameters
+        ----------
+        K: float
+
+        Returns
+        -------
+        float
+
+        """
+        Ks = [K]
+
+        # RG flow forward until K ~ 0
+        while Ks[-1] > tol:
+            Ks.append(One_Dim_Ising.Kprime(Ks[-1]))
+
+        # boundary condition
+        zeta = np.log(2)
+
+        # propagate backwards
+        for K in reversed(Ks[:-1]):
+            zeta = 0.5 * (zeta + 0.5 * np.log(np.cosh(2 * K)) + np.log(2))
+
+        return zeta
+
 
 class Two_Dim_Ising:
     @staticmethod
@@ -59,7 +93,7 @@ class Two_Dim_Ising:
         float
 
         """
-        return 2 * (np.cosh(2 * K) ** .5) * 2 * (np.cosh(4 * K) ** (1 / 8))
+        return 2 * (np.cosh(2 * K) ** .5) * (np.cosh(4 * K) ** (1 / 8))
 
     @staticmethod
     def zeta(K):

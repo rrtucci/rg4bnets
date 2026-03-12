@@ -75,30 +75,24 @@ def plot_functions(funs,
 
 if __name__ == "__main__":
     def main1():
-        plot_functions([One_Dim_Ising.Kprime],
+        plot_functions([One_Dim_Ising.Kprime, Two_Dim_Ising.Kprime],
+                       fun_names=["1-dim Ising", "2-dim Ising"],
                        xlabel="K",
                        ylabel="K'(K)",
-                       caption="plot of K'(K) for 1-dim ising",
+                       caption="plots of K'(K)",
                        x_min=0,
-                       x_max=2,
-                       num_points=100)
-
-        plot_functions([Two_Dim_Ising.Kprime],
-                       xlabel="K",
-                       ylabel="K'(K)",
-                       caption="plot of K'(K) for 2-dim ising",
-                       x_min=0,
-                       x_max=2,
+                       x_max=1,
                        num_points=100)
 
 
     def main2():
-        plot_functions([Two_Dim_Ising.zeta],
+        plot_functions([One_Dim_Ising.zeta, Two_Dim_Ising.zeta],
+                       fun_names=["1-dim Ising", "2-dim Ising"],
                        xlabel="K",
                        ylabel="zeta(K)",
-                       caption="plot of zeta(K) for 2-dim ising",
+                       caption="plots of zeta(K)",
                        x_min=0,
-                       x_max=2,
+                       x_max=1,
                        num_points=100)
 
 
@@ -115,5 +109,5 @@ if __name__ == "__main__":
 
 
     # main1()
-    # main2()
-    main3()
+    main2()
+    #main3()
