@@ -12,7 +12,8 @@ def plot_functions(funs,
                    num_points=100,
                    do_vert_line=True,
                    vert_x=K_CURIE,
-                   vert_label=r"$K = K_c$"):
+                   vert_label=r"$K = K_c$",
+                   do_unit_slope_line=True):
     """
     This method generates a matplotlib plot for a list of functions.
 
@@ -36,11 +37,13 @@ def plot_functions(funs,
     num_points: int
         number of points calculated and fitted
     do_vert_line: bool
-        whether to write dashed vertical line at some specified x value
+        True iff draw dashed vertical line at some specified x value
     vert_x: float
         x value of vertical dashed line
-    vert_label:
+    vert_label: str
         label of vertical dashed line (for example, 'y=x' or 'x=5')
+    do_unit_slope_line: bool
+        True iff draw y=x line in red
 
     Returns
     -------
@@ -60,7 +63,8 @@ def plot_functions(funs,
         ax.plot(xx, yy, label=label)
 
     # Add x = y in red
-    ax.plot(xx, xx, 'r-', linewidth=2, label="x = y")
+    if do_unit_slope_line:
+        ax.plot(xx, xx, 'r-', linewidth=2, label="x = y")
 
     if do_vert_line:
         ax.axvline(vert_x, color='black', linestyle='--', label=vert_label)
@@ -107,7 +111,25 @@ if __name__ == "__main__":
                        x_max=1,
                        num_points=100)
 
+    def main_landau_pole(pos, g0=1):
+        def landau(x, beta2):
+            return g0/(1-beta2*g0*np.log(x))
+        def pos_beta2(x):
+            return landau(x, beta2=pos)
+        def neg_beta2(x):
+            return landau(x, beta2=-pos)
 
+        plot_functions([pos_beta2, neg_beta2],
+                       fun_names=["fun with beta2 > 0", "fun with beta2 < 0"],
+                       xlabel="Lambda/Lambda0",
+                       ylabel="g",
+                       caption=f"beta2=+/-{pos}, g0={g0}",
+                       x_min=-2,
+                       x_max=2,
+                       num_points=100,
+                       do_vert_line=False,
+                       do_unit_slope_line=False)
     # main1()
-    main2()
+    #main2()
     #main3()
+    main_landau_pole(2)
