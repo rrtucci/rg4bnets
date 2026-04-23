@@ -112,18 +112,18 @@ if __name__ == "__main__":
                        num_points=100)
 
     def main_landau_pole(pos, g0=1):
-        def landau(x, beta2):
-            return g0/(1-beta2*g0*np.log(x))
-        def pos_beta2(x):
-            return landau(x, beta2=pos)
-        def neg_beta2(x):
-            return landau(x, beta2=-pos)
+        def landau(x, beta3):
+            return g0/(1-2*beta3*g0*np.log(x))
+        def pos_beta3(x):
+            return landau(x, beta3=pos)
+        def neg_beta3(x):
+            return landau(x, beta3=-pos)
 
-        plot_functions([pos_beta2, neg_beta2],
-                       fun_names=["fun with beta2 > 0", "fun with beta2 < 0"],
+        plot_functions([pos_beta3, neg_beta3],
+                       fun_names=["fun with beta3 > 0", "fun with beta3 < 0"],
                        xlabel="Lambda/Lambda0",
                        ylabel="g",
-                       caption=f"beta2=+/-{pos}, g0={g0}",
+                       caption=f"beta3=+/-{pos}, g0={g0}",
                        x_min=-2,
                        x_max=2,
                        num_points=100,
@@ -132,4 +132,4 @@ if __name__ == "__main__":
     # main1()
     #main2()
     #main3()
-    main_landau_pole(2)
+    main_landau_pole(2.3)
