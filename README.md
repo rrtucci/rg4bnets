@@ -1,5 +1,6 @@
 # Welcome to rg4bnets (Renormalization Group for Bayesian Network)
 
+[ken-wilson](pics/ken-wilson.png) Ken Wilson, 1982 Nobel prize for RG
 
 This python software was written as a supplement to 
 Chapter 96
