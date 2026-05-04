@@ -1,4 +1,4 @@
-# Welcome to rg4bnets (enormalization Group for Bayesian Network)
+# Welcome to rg4bnets (Renormalization Group for Bayesian Network)
 
 
 This python software was written as a supplement to 
