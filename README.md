@@ -7,7 +7,7 @@ entitled "Renormalization Group for Bayesian Networks",
 of my free open source book 
 ["Bayesuvius"](https://github.com/rrtucci/Bayesuvius). 
 
-If you just want to download Chapter 94 
+If you just want to download Chapter 96 
 instead of the whole book,
 [here is a link](https://github.
 com/rrtucci/Bayesuvius/blob/master/rg4bnets-chapter.pdf) 
