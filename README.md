@@ -20,4 +20,4 @@ Chapters in Bayesuvius about RG:
 1. Ising Dynamical Bayesian Network, Chapter 52
 1. RG for ϕ4 model, Chapter 99
 1. RG for Bayesian Networks, Chapter 96
-1. RG for Partial Differential Equations (PDE), Chapter 9
+1. RG for Partial Differential Equations (PDE), Chapter 98
