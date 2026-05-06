@@ -1,4 +1,4 @@
-# Welcome to rg4bnets (Renormalization Group for Bayesian Network)
+# Welcome to rg4bnets (Renormalization Group for Bayesian Networks)
 
 ![ken-wilson](pics/ken-wilson.png) Ken Wilson, 1982 Nobel prize for RG
 
@@ -21,3 +21,6 @@ Chapters in Bayesuvius about RG:
 1. RG for ϕ4 model, Chapter 99
 1. RG for Bayesian Networks, Chapter 96
 1. RG for Partial Differential Equations (PDE), Chapter 98
+
+This github repo assumes you've already seen the
+[ising-dbnet github repo](https://github.com/rrtucci/ising-dbnet)
